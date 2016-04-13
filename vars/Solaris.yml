@@ -17,3 +17,9 @@ apache_ports_configuration_items:
     line: "Listen {{ apache_listen_port }}"
   - regexp: "^#?NameVirtualHost "
     line: "NameVirtualHost *:{{ apache_listen_port }}"
+
+apache_user_configuration_items:
+  - regexp: "^User "
+    line: "User {{ apache_run_user }}"
+  - regexp: "^Group "
+    line: "Group {{ apache_run_group }}"

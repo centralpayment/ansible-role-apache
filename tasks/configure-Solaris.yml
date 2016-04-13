@@ -8,6 +8,15 @@
   with_items: "{{ apache_ports_configuration_items }}"
   notify: restart apache
 
+- name: Configure Apache User/Group.
+  lineinfile:
+    dest: "{{ apache_server_root }}/conf/{{ apache_daemon }}.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items: "{{ apache_user_configuration_items }}"
+  notify: restart apache
+
 - name: Add apache vhosts configuration.
   template:
     src: "vhosts-{{ apache_vhosts_version }}.conf.j2"
